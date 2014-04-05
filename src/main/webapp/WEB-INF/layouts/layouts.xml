@@ -1,0 +1,41 @@
+<?xml  version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+
+    <definition name="default" template="/WEB-INF/pages/default.jsp">
+        <put-attribute name="header" value="/WEB-INF/pages/common/header.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/pages/common/footer.jsp"/>
+    </definition>
+
+    <definition name="index" extends="default">
+        <put-attribute name="body" value="/WEB-INF/pages/index.jsp"/>
+    </definition>
+
+    <definition name="localImage" extends="default">
+        <put-attribute name="body" value="/WEB-INF/pages/localImage.jsp"/>
+    </definition>
+
+    <definition name="scanImage" extends="default">
+        <put-attribute name="body" value="/WEB-INF/pages/scanImage.jsp"/>
+    </definition>
+
+    <definition name="operationSucceed" extends="default">
+        <put-attribute name="body" value="/WEB-INF/pages/operationSucceed.jsp"/>
+    </definition>
+
+    <definition name="operationFailed" extends="default">
+        <put-attribute name="body" value="/WEB-INF/pages/operationFailed.jsp"/>
+    </definition>
+
+<!--
+    <definition name="example1" extends="default">
+        <put-attribute name="body" value="/WEB-INF/pages/example1.jsp"/>
+    </definition>
+
+    <definition name="example2" extends="default">
+        <put-attribute name="body" value="/WEB-INF/pages/example2.jsp"/>
+    </definition>-->
+
+</tiles-definitions>

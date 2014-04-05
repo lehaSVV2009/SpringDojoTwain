@@ -19,9 +19,8 @@
         <xml.version>2.2.6</xml.version>
         <log4j.version>1.2.14</log4j.version>
         <mysql.connector.version>5.1.6</mysql.connector.version>
-        <webjars-locator.version>0.13</webjars-locator.version>
-        <webjars-jquery.version>1.11.0-1</webjars-jquery.version>
-        <webjars-bootstrap.version>3.1.1</webjars-bootstrap.version>
+        <apache.tiles.version>2.2.1</apache.tiles.version>
+        <org.slf4j.version>1.5.10</org.slf4j.version>
 
     </properties>
 
@@ -184,25 +183,48 @@
         </dependency>
 
 
-        <!-- BOOTSTRAP SOURCES -->
+        <!-- APACHE TILES -->
 
         <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>webjars-locator</artifactId>
-            <version>${webjars-locator.version}</version>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-core</artifactId>
+            <version>${apache.tiles.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>jquery</artifactId>
-            <version>${webjars-jquery.version}</version>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-jsp</artifactId>
+            <version>${apache.tiles.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>bootstrap</artifactId>
-            <version>${webjars-bootstrap.version}</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${org.slf4j.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>${org.slf4j.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${org.slf4j.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- APACHE BASE-64 DECODER -->
+
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.2</version>
+        </dependency>
+
 
 
     </dependencies>
@@ -214,11 +236,20 @@
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>maven-jetty-plugin</artifactId>
-                <version>6.1.10</version><!--
+                <version>6.1.10</version>
                 <configuration>
+                    <systemProperties>
+                        <systemProperty>
+                            <name>org.eclipse.jetty.server.Request.maxFormContentSize</name>
+                            <value>20000000</value> <!-- or any other value -1 is for max -->
+                        </systemProperty>
+                    </systemProperties>
+                    <!--
                     <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>-->
+                    <target>1.6</target>-->
+                    <stopKey/>
+                    <stopPort/>
+                </configuration>
             </plugin>
         </plugins>
     </build>

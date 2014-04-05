@@ -20,6 +20,13 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/")
 public class HomeController {
 
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String index() {
+        return "redirect:/hello";
+    }
+
+
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String home() {
         System.out.println("Hello!");
@@ -42,10 +49,6 @@ public class HomeController {
     }
 
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index() {
-        return "redirect:/hello";
-    }
 
 
 
@@ -61,7 +64,5 @@ public class HomeController {
         System.out.println("Validation value: " + value);
         return !"".equals(value);
     }
-
-
 
 }
