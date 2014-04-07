@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Scan documents with settings</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <meta http-equiv="Content-Language" content="en-us" />
+    <meta http-equiv="X-UA-Compatible" content="requiresActiveX=true" />
+    <link href="../../2%20-%20DWT_HTML_CustomScan/Styles/style.css" type="text/css" rel="stylesheet" />
+</head>
+<body onload="onPageLoad();">    
+    <div class="DWTPage body_Broad_width">
+        <div class="DWTHeader">
+            <!-- DWT_PageHead.js is used to initiate the head of the sample page. Not necessary!-->
+            <script src="../../2%20-%20DWT_HTML_CustomScan/Scripts/DWT_PageHead.js"></script>
+        </div>
+        <div class="DWTBody">
+            <!--This is where Dynamic Web TWAIN control will be rendered.-->
+            <div id="dwtcontrolContainer" class="DWTContainer"></div>
+
+            <!--This is where you add the actual buttons to control the component.-->
+            <div class="ScanWrapper">
+                <div id="div_ScanImage" class="divTableStyle">
+                    <ul>
+                        <li>
+                            <label for="source"><b>Select Source:</b><select size="1" id="source" style="position:relative;width: 220px;" onchange="source_onchange()"><option value = ""></option></select></label></li>
+                        <li>
+                            <label for = 'ShowUI'><input type='checkbox' id='ShowUI' />Show UI&nbsp;</label>
+                            <label for = 'ADF'><input type='checkbox' id='ADF' />ADF&nbsp;</label>
+                            <label for = 'Duplex'><input type='checkbox' id='Duplex'/>Duplex</label></li>
+                        <li><b>Pixel Type:</b>
+                            <label for='BW'><input type='radio' id='BW' name='PixelType'/>B&amp;W </label>
+                            <label for='Gray'><input type='radio' id='Gray' name='PixelType'/>Gray</label>
+                            <label for='RGB'><input type='radio' id='RGB' name='PixelType'/>Color</label></li>
+                        <li>
+                            <label for='Resolution'><b>Resolution:</b><select size='1' id='Resolution'><option value = ''></option></select></label></li>
+                    </ul>
+                    <input class="DWTScanButton btn" type="button" value="Scan" onclick ="acquireImage();"/>
+                </div>
+                <div id="divInfo"></div>
+            </div>
+            <div class="body_clr"></div>
+        </div>
+
+        <div class="DWTTail">
+            <script src="../../2%20-%20DWT_HTML_CustomScan/Scripts/DWT_PageTail.js"></script>
+        </div>
+    </div>
+    <script src="../../2%20-%20DWT_HTML_CustomScan/Scripts/dynamsoft.webtwain.initiate.js"></script>
+    <script src="../../2%20-%20DWT_HTML_CustomScan/Scripts/DWTSample_CustomScan.js"></script>
+</body>
+</html>

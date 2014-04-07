@@ -9,6 +9,18 @@ package com.kadet.twainComparator.entity;
 public class ScannedImage {
 
     private String name;
-    private Byte[] bytes;
+    private byte[] bytes;
 
+    public ScannedImage(String name, byte[] bytes) {
+        this.name = name;
+        this.bytes = bytes;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public byte[] getBytes() {
+        return bytes;
+    }
 }

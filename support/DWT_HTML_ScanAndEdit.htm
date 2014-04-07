@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Scan and edit documents</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
+    <meta http-equiv="Content-Language" content="en-us"/>
+    <meta http-equiv="X-UA-Compatible" content="requiresActiveX=true"/>
+    <link href="../../3%20-%20DWT_HTML_ScanAndEdit/Styles/style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body onload="onPageLoad();">
+<div class="DWTPage body_Broad_width">
+    <div class="DWTHeader">
+        <!-- DWT_PageHead.js is used to initiate the head of the sample page. Not necessary!-->
+        <script src="../../3%20-%20DWT_HTML_ScanAndEdit/Scripts/DWT_PageHead.js"></script>
+    </div>
+    <div class="DWTBody">
+        <!--This is where Dynamic Web TWAIN control will be rendered.-->
+        <div id="dwtcontrolContainer" class="DWTContainer"></div>
+
+        <!--This is where you add the actual buttons to control the component.-->
+        <div class="ScanWrapper">
+            <div class="divTableStyle" style="text-align:center;">
+                <input class="DWTScanButton btn" type="button" value="Scan" onclick="acquireImage();"/></div>
+            <div style="height:15px;"></div>
+            <div id="div_ScanImage" class="divTableStyle">
+                <ul>
+                    <li><img alt="arrow" src="../../3%20-%20DWT_HTML_ScanAndEdit/Images/arrow.gif" width="9"
+                             height="12"/><b>Edit Image</b></li>
+                    <li>
+                        <input class="DWTEditButton" type="button" value="Show Image Editor"
+                               onclick="btnShowImageEditor_onclick();"/>
+                        <input class="DWTEditButton" type="button" value="Rotate Left"
+                               onclick="btnRotateLeft_onclick();"/>
+                        <input class="DWTEditButton" type="button" value="Rotate Right"
+                               onclick="btnRotateRight_onclick();"/>
+                        <input class="DWTEditButton" type="button" value="Mirror" onclick="btnMirror_onclick();"/>
+                        <input class="DWTEditButton" type="button" value="Flip" onclick="btnFlip_onclick();"/>
+                        <input class="DWTEditButton" type="button" value="Crop" id="btnCrop"
+                               onclick="btnCrop_onclick();"/>
+                        <input class="DWTEditButton" type="button" value="Change Image Size" id="btnChangeImageSize"
+                               onclick="btnChangeImageSize_onclick();"/>
+                    </li>
+                </ul>
+            </div>
+            <div id="divInfo"></div>
+        </div>
+        <div class="body_clr"></div>
+    </div>
+
+    <div class="DWTTail">
+        <script src="../../3%20-%20DWT_HTML_ScanAndEdit/Scripts/DWT_PageTail.js"></script>
+    </div>
+</div>
+
+<div id="ImgSizeEditor" style="visibility:hidden; text-align:left;">
+    <ul>
+        <li><label for="img_height"><b>New Height :</b>
+            <input type="text" id="img_height" style="width:50%;" size="10"/>pixel</label></li>
+        <li><label for="img_width"><b>New Width :</b>&nbsp;
+            <input type="text" id="img_width" style="width:50%;" size="10"/>pixel</label></li>
+        <li>Interpolation method:
+            <select size="1" id="InterpolationMethod">
+                <option value=""></option>
+            </select></li>
+        <li style="text-align:center;">
+            <input type="button" value="   OK   " id="btnChangeImageSizeOK" onclick="btnChangeImageSizeOK_onclick();"/>
+            <input type="button" value=" Cancel " id="btnCancelChange" onclick="btnCancelChange_onclick();"/></li>
+    </ul>
+</div>
+
+<div id="Crop" style="visibility:hidden ;">
+    <div style="width:50%; height:100%; float:left; text-align:left;">
+        <ul>
+            <li><label for="img_left"><b>left: </b>
+                <input type="text" id="img_left" style="width:50%;" size="4"/></label></li>
+            <li><label for="img_top"><b>top: </b>
+                <input type="text" id="img_top" style="width:50%;" size="4"/></label></li>
+            <li style="text-align:center;">
+                <input type="button" value="  OK  " id="btnCropOK" onclick="btnCropOK_onclick()"/></li>
+        </ul>
+    </div>
+    <div style="width:50%; height:100%; float:left; text-align:right;">
+        <ul>
+            <li><label for="img_right"><b>right : </b>
+                <input type="text" id="img_right" style="width:50%;" size="4"/></label></li>
+            <li><label for="img_bottom"><b>bottom:</b>
+                <input type="text" id="img_bottom" style="width:50%;" size="4"/></label></li>
+            <li style=" text-align:center;">
+                <input type="button" value="Cancel" id="cancelcrop" onclick="btnCropCancel_onclick()"/></li>
+        </ul>
+    </div>
+</div>
+<script src="../../3%20-%20DWT_HTML_ScanAndEdit/Scripts/dynamsoft.webtwain.initiate.js"></script>
+<script src="../../3%20-%20DWT_HTML_ScanAndEdit/Scripts/DWTSample_ScanAndEdit.js"></script>
+</body>
+</html>

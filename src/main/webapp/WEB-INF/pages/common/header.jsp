@@ -1,4 +1,4 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<h1>IBA Web TWAIN</h1>
+<h1><a href="<c:url value="/hello"/>">IBA Web TWAIN</a> </h1>

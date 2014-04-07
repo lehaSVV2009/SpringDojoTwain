@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Scan and save documents</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <meta http-equiv="Content-Language" content="en-us" />
+    <meta http-equiv="X-UA-Compatible" content="requiresActiveX=true" />
+    <link href="../../4%20-%20DWT_HTML_ScanAndSave/Styles/style.css" type="text/css" rel="stylesheet" />
+</head>
+<body onload="onPageLoad();">    
+    <div class="DWTPage body_Broad_width">
+        <div class="DWTHeader">
+            <!-- DWT_PageHead.js is used to initiate the head of the sample page. Not necessary!-->
+            <script src="../../4%20-%20DWT_HTML_ScanAndSave/Scripts/DWT_PageHead.js"></script>
+        </div>
+        <div class="DWTBody" >
+            <!--This is where Dynamic Web TWAIN control will be rendered.-->
+            <div id="dwtcontrolContainer" class="DWTContainer"></div>
+
+            <!--This is where you add the actual buttons to control the component.-->
+            <div class="ScanWrapper">
+               <div class="divTableStyle" style="text-align:center;">
+                        <input class="DWTScanButton btn" type="button" value="Scan" onclick="acquireImage();" /> </div>
+                <div style="height:15px;"></div>
+                <div id="divSave" class="divTableStyle" >
+                    <ul>
+                        <li><img alt="arrow" src="../../4%20-%20DWT_HTML_ScanAndSave/Images/arrow.gif" width="9" height="12"/><b>Save Image</b></li>
+                        <li>
+                            <label for="txtFileNameforSave">File Name: <input type="text" size="20" id="txtFileNameforSave"/></label></li>
+                        <li>
+                            <label for="imgTypebmp">
+                                <input type="radio" value="bmp" name="imgType_save" id="imgTypebmp" onclick ="rdsave_onclick();"/>BMP</label>
+	                        <label for="imgTypejpeg">
+		                        <input type="radio" value="jpg" name="imgType_save" id="imgTypejpeg" onclick ="rdsave_onclick();"/>JPEG</label>
+	                        <label for="imgTypetiff">
+		                        <input type="radio" value="tif" name="imgType_save" id="imgTypetiff" onclick ="rdTIFFsave_onclick();"/>TIFF</label>
+	                        <label for="imgTypepng">
+		                        <input type="radio" value="png" name="imgType_save" id="imgTypepng" onclick ="rdsave_onclick();"/>PNG</label>
+	                        <label for="imgTypepdf">
+		                        <input type="radio" value="pdf" name="imgType_save" id="imgTypepdf" onclick ="rdPDFsave_onclick();"/>PDF</label></li>
+                        <li>
+                            <label for="MultiPageTIFF_save"><input type="checkbox" id="MultiPageTIFF_save"/>Multi-Page TIFF</label>
+                            <label for="MultiPagePDF_save"><input type="checkbox" id="MultiPagePDF_save"/>Multi-Page PDF </label></li>
+                    </ul>
+                    <input id="btnSave" class="DWTScanButton btn" type="button" value="Save Image" onclick ="btnSave_onclick()"/>
+                </div>
+                <div id="divInfo"></div>
+            </div>
+            <div class="body_clr"></div>
+        </div>	
+        
+        <div class="DWTTail">
+            <script src="../../4%20-%20DWT_HTML_ScanAndSave/Scripts/DWT_PageTail.js"></script>
+        </div>
+        
+    </div>
+    <script src="../../4%20-%20DWT_HTML_ScanAndSave/Scripts/dynamsoft.webtwain.initiate.js"></script>
+    <script src="../../4%20-%20DWT_HTML_ScanAndSave/Scripts/DWTSample_ScanAndSave.js"></script>
+</body>
+</html>

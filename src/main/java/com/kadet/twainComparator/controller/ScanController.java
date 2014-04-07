@@ -1,6 +1,8 @@
 package com.kadet.twainComparator.controller;
 
+import com.kadet.twainComparator.entity.ScannedImage;
 import com.kadet.twainComparator.service.ImagesService;
+import com.kadet.twainComparator.util.Constants;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,13 +34,13 @@ public class ScanController {
 
     @RequestMapping(value = "/scanImage")
     public String showScanPage() {
-        return "scanImage";
+        return Constants.SCAN_IMAGE_JSP;
     }
 
     @RequestMapping(value = "/sendScannedImages", method = RequestMethod.POST)
     public String sendScannedImages(HttpServletRequest request) {
 
-        List<File> images = new ArrayList<File>();
+        List<ScannedImage> images = new ArrayList<ScannedImage>();
         Enumeration enumeration = request.getParameterNames();
         List<String> scannedImagesNames = new ArrayList<String>();
         while (enumeration.hasMoreElements()) {
@@ -48,34 +50,19 @@ public class ScanController {
             }
         }
         if (scannedImagesNames.size() == 0) {
-            return "operationFailed";
+            return Constants.OPERATION_FAILED_JSP;
         }
-        try {
-
-            for (String imageName : scannedImagesNames) {
-                File image = new File("d:/" + imageName);
-                String base64Image = request.getParameter(imageName);
-                boolean fileIsCreated = image.createNewFile();
-                if (fileIsCreated) {
-                    byte[] bytes = Base64.decodeBase64(base64Image.getBytes());
-                    FileOutputStream stream = new FileOutputStream(image);
-                    try {
-                        stream.write(bytes);
-                        images.add(image);
-                    } finally {
-                        stream.close();
-                    }
-                }
-            }
-
-            imagesService.putImages(images);
-
-        } catch (IOException e) {
-            return "operationFailed";
+        for (String imageName : scannedImagesNames) {
+            String base64Image = request.getParameter(imageName);
+            byte[] imageBytes = Base64.decodeBase64(base64Image.getBytes());
+            ScannedImage image = new ScannedImage(imageName, imageBytes);
+            images.add(image);
         }
-
-
-        return "operationSucceed";
+        if (images.size() == 0) {
+            return Constants.OPERATION_FAILED_JSP;
+        }
+        imagesService.putImages(images);
+        return Constants.OPERATION_SUCCEED_JSP;
     }
 
 }

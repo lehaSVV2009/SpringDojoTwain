@@ -59,6 +59,19 @@ var seed;
 function onPageLoad() {
     initInfo();            //Add guide info
 
+    _iLeft = 0;
+    _iTop = 0;
+    _iRight = 0;
+    _iBottom = 0;
+
+    var varInterpolationMethod = document.getElementById("InterpolationMethod");
+    if (varInterpolationMethod) {
+        varInterpolationMethod.options.length = 0;
+        varInterpolationMethod.options.add(new Option("NearestNeighbor", 1));
+        varInterpolationMethod.options.add(new Option("Bilinear", 2));
+        varInterpolationMethod.options.add(new Option("Bicubic", 3));
+    }
+
     seed = setInterval(initControl, 500);
 }
 
