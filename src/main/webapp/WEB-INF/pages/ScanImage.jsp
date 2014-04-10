@@ -35,11 +35,192 @@
 <div class="appBorderContainer" data-dojo-type="dijit/layout/BorderContainer" style="width: 100%; height: 90%">
 
 
-<div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="splitter:true, region:'center'">
+    <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="splitter:true, region:'center'">
+
+        <div id="dwtcontrolContainer" data-dojo-type="dijit/layout/ContentPane"
+             data-dojo-props="splitter:true, region:'center'"></div>
+
+    </div>
 
 
-<div id="dwtcontrolContainer" data-dojo-type="dijit/layout/ContentPane"
-     data-dojo-props="splitter:true, region:'center'"></div>
+    <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="minSize: 200, region: 'trailing', splitter: true">
+
+        <!-- Scan Buttons -->
+
+        <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="splitter: true">
+
+            <div data-dojo-type="dojox/layout/TableContainer" data-dojo-props="cols:1">
+
+                <select size="1" id="source"
+                        title="Select Source"
+                        data-dojo-type="dijit/form/Select"
+                        onchange="source_onchange()">
+                    <option value=""></option>
+                </select>
+
+                <div type='checkbox' title="Show UI" data-dojo-type="dijit/form/CheckBox" id='ShowUI'></div>
+                <div type='checkbox' title="ADF" data-dojo-type="dijit/form/CheckBox" id='ADF'></div>
+                <div type='checkbox' title="Duplex" data-dojo-type="dijit/form/CheckBox" id='Duplex'></div>
+                <div type='radio' title="B&amp;W" data-dojo-type="dijit/form/RadioButton" id='BW'
+                     name='PixelType'></div>
+                <div type='radio' title="Gray" data-dojo-type="dijit/form/RadioButton" id='Gray' name='PixelType'></div>
+                <div type='radio' title="Color" data-dojo-type="dijit/form/RadioButton" id='RGB' name='PixelType'></div>
+                <select size='1' id='Resolution'
+                        title="Resolution"
+                        data-dojo-type="dijit/form/Select">
+                    <option value=''></option>
+                </select>
+
+            </div>
+
+            <button id="scanButton" data-dojo-type="dijit/form/Button" type="button" role="button"
+                    onclick="acquireImage();">Scan
+            </button>
+
+        </div>
+
+        <div style="height:15px;"></div>
+
+        <!-- Edit Image Buttons -->
+
+        <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="splitter: true">
+
+            <button data-dojo-type="dijit/form/Button" type="button" role="button"
+                    onclick="btnShowImageEditor_onclick();">Show Image Editor
+            </button>
+            <button data-dojo-type="dijit/form/Button" type="button" role="button"
+                    onclick="btnRotateLeft_onclick();">Rotate Left
+            </button>
+            <button data-dojo-type="dijit/form/Button" type="button" role="button"
+                    onclick="btnRotateRight_onclick();">Rotate Right
+            </button>
+
+            <br/>
+
+            <button data-dojo-type="dijit/form/Button" type="button" role="button"
+                    onclick="btnMirror_onclick();">Mirror
+            </button>
+            <button data-dojo-type="dijit/form/Button" type="button" role="button"
+                    onclick="btnFlip_onclick();">Flip
+            </button>
+            <button data-dojo-type="dijit/form/Button" type="button" role="button" id="btnCrop"
+                    onclick="btnCrop_onclick();">Crop
+            </button>
+            <button data-dojo-type="dijit/form/Button" type="button" role="button"
+                    id="btnChangeImageSize"
+                    onclick="btnChangeImageSize_onclick();">Change Image Size
+            </button>
+
+        </div>
+
+        <!-- Save Image On Local Computer -->
+
+        <div style="height:15px;"></div>
+
+        <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="splitter: true">
+
+            <div data-dojo-type="dojox/layout/TableContainer" data-dojo-props="cols:1">
+
+                <div id="txtFileNameforSave" data-dojo-type="dijit/form/TextBox" title="File Name:"
+                     name="text_box"
+                     value="WebTWAINImage"></div>
+
+                <div type='radio' title="BMP" data-dojo-type="dijit/form/RadioButton" id='imgTypebmp'
+                     onclick="rdsave_onclick();"
+                     value="bmp"
+                     name='imgType_save'></div>
+                <div type='radio' title="JPEG" data-dojo-type="dijit/form/RadioButton" id='imgTypejpeg'
+                     onclick="rdsave_onclick();"
+                     value="jpeg"
+                     name='imgType_save'></div>
+                <div type='radio' title="TIFF" data-dojo-type="dijit/form/RadioButton" id='imgTypetiff'
+                     onclick="rdTIFFsave_onclick();"
+                     value="tiff"
+                     name='imgType_save'></div>
+                <div type='radio' title="PNG" data-dojo-type="dijit/form/RadioButton" id='imgTypepng'
+                     onclick="rdsave_onclick();"
+                     name='imgType_save'></div>
+                <div type='radio' title="PDF" data-dojo-type="dijit/form/RadioButton" id='imgTypepdf'
+                     onclick="rdPDFsave_onclick();"
+                     value="pdf"
+                     name='imgType_save'></div>
+
+                <div type='checkbox' title="Multi-Page TIFF" data-dojo-type="dijit/form/CheckBox"
+                     id='MultiPageTIFF_save'></div>
+                <div type='checkbox' title="Multi-Page PDF" data-dojo-type="dijit/form/CheckBox"
+                     id='MultiPagePDF_save'></div>
+
+
+            </div>
+
+            <button data-dojo-type="dijit/form/Button" type="button" role="button"
+                    id="btnSave"
+                    onclick="btnSave_onclick();">Save Image
+            </button>
+
+        </div>
+
+        <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="splitter: true">
+
+            <button id="addToSendingImagesButton" data-dojo-type="dijit/form/Button" type="button" role="button"
+                    onclick="appendImageToForm();">Add Scanned To Sending Images
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- Help element for image Editing (Image size Editing) -->
+
+    <div id="ImgSizeEditor" style="visibility:hidden; text-align:left;">
+        <ul>
+            <li><label for="img_height"><b>New Height :</b>
+                <input type="text" id="img_height" style="width:50%;" size="10"/>pixel</label></li>
+            <li><label for="img_width"><b>New Width :</b>&nbsp;
+                <input type="text" id="img_width" style="width:50%;" size="10"/>pixel</label></li>
+            <li>Interpolation method:
+                <select size="1" id="InterpolationMethod">
+                    <option value=""></option>
+                </select></li>
+            <li style="text-align:center;">
+                <input type="button" value="   OK   " id="btnChangeImageSizeOK"
+                       onclick="btnChangeImageSizeOK_onclick();"/>
+                <input type="button" value=" Cancel " id="btnCancelChange" onclick="btnCancelChange_onclick();"/></li>
+        </ul>
+    </div>
+
+    <!-- Help element for image Editing (Crop image) -->
+
+    <div id="Crop" style="visibility:hidden ;">
+        <div style="width:50%; height:100%; float:left; text-align:left;">
+            <ul>
+                <li><label for="img_left"><b>left: </b>
+                    <input type="text" id="img_left" style="width:50%;" size="4"/></label></li>
+                <li><label for="img_top"><b>top: </b>
+                    <input type="text" id="img_top" style="width:50%;" size="4"/></label></li>
+                <li style="text-align:center;">
+                    <input type="button" value="  OK  " id="btnCropOK" onclick="btnCropOK_onclick()"/></li>
+            </ul>
+        </div>
+        <div style="width:50%; height:100%; float:left; text-align:right;">
+            <ul>
+                <li><label for="img_right"><b>right : </b>
+                    <input type="text" id="img_right" style="width:50%;" size="4"/></label></li>
+                <li><label for="img_bottom"><b>bottom:</b>
+                    <input type="text" id="img_bottom" style="width:50%;" size="4"/></label></li>
+                <li style=" text-align:center;">
+                    <input type="button" value="Cancel" id="cancelcrop" onclick="btnCropCancel_onclick()"/></li>
+            </ul>
+        </div>
+    </div>
+
+
+</div>
+
+</div>
+
 
 <script type="text/javascript" language="javascript">
 
@@ -584,13 +765,41 @@ function getBytesBase64FromSelectedImages() {
 
 
 function addImageNameToImagesNamesContainer(imageName) {
-
     var imagesNamesContainer = document.getElementById('imagesNamesContainer');
     var imageNameElement = document.createElement('div');
-    imageNameElement.innerHTML = imageName;
+    imageNameElement.name = imageName;
+    var imageNameSpan = createSpan(imageName);
+    var removeImageButton = createButton(new Function('removeImage("' + imageName + '")'), ' x ');
+    imageNameElement.appendChild(imageNameSpan);
+    imageNameElement.appendChild(removeImageButton);
     imagesNamesContainer.appendChild(imageNameElement);
-
 }
+
+
+function createSpan (innerText) {
+    var span = document.createElement('span');
+
+    if (typeof(span.innerText) != String(undefined)) {
+        span.innerText = innerText;
+    } else {
+        span.textContent = innerText;                           //  For Mozilla Based Browsers
+    }
+
+    return span;
+}
+
+function createButton (onClick, value) {
+    var button = document.createElement('input');
+    button.type = 'button';
+    button.value = value;
+    try {
+        button.attachEvent('onclick', onClick);
+    } catch (e) {
+        button.addEventListener('click', onClick);
+    }
+    return button;
+}
+
 
 
 function appendImageToForm() {
@@ -604,169 +813,36 @@ function appendImageToForm() {
     ++hiddenInputsNumber;
 }
 
+function removeImage (imageName) {
+    removeElementFromMainForm(imageName);
+    removeElementFromImagesNamesContainer(imageName);
+}
+
+function removeElementFromMainForm (imageName) {
+    var form = document.getElementById('scanForm');
+    removeOneElementFromParentByName(imageName, form, 'input');
+}
+function removeElementFromImagesNamesContainer (imageName) {
+    var imagesNamesContainer = document.getElementById('imagesNamesContainer');
+    removeOneElementFromParentByName(imageName, imagesNamesContainer, 'div');
+}
+
+function removeOneElementFromParentByName (name, parent, type) {
+    var elements = parent.getElementsByTagName(type);
+    var elementsWithSuchName = new Array();
+    for (var index = 0; index < elements.length; ++index) {
+        if (elements[index].name == name) {
+            elementsWithSuchName.push(elements[index]);
+        }
+    }
+    if (elementsWithSuchName.length != 1) {
+        return false;
+    }
+    parent.removeChild(elementsWithSuchName[0]);
+    return true;
+}
+
 </script>
 
-</div>
 
 
-<div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="minSize: 200, region: 'trailing', splitter: true">
-
-    <!-- Scan Buttons -->
-
-    <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="splitter: true">
-
-        <div data-dojo-type="dojox/layout/TableContainer" data-dojo-props="cols:1">
-
-            <select size="1" id="source"
-                    title="Select Source"
-                    data-dojo-type="dijit/form/Select"
-                    onchange="source_onchange()">
-                <option value=""></option>
-            </select>
-
-            <div type='checkbox' title="Show UI" data-dojo-type="dijit/form/CheckBox" id='ShowUI'></div>
-            <div type='checkbox' title="ADF" data-dojo-type="dijit/form/CheckBox" id='ADF'></div>
-            <div type='checkbox' title="Duplex" data-dojo-type="dijit/form/CheckBox" id='Duplex'></div>
-            <div type='radio' title="B&amp;W" data-dojo-type="dijit/form/RadioButton" id='BW' name='PixelType'></div>
-            <div type='radio' title="Gray" data-dojo-type="dijit/form/RadioButton" id='Gray' name='PixelType'></div>
-            <div type='radio' title="Color" data-dojo-type="dijit/form/RadioButton" id='RGB' name='PixelType'></div>
-            <select size='1' id='Resolution'
-                    title="Resolution"
-                    data-dojo-type="dijit/form/Select">
-                <option value=''></option>
-            </select>
-
-        </div>
-
-        <button id="scanButton" data-dojo-type="dijit/form/Button" type="button" role="button"
-                onclick="acquireImage();">Scan
-        </button>
-
-
-        <button id="addToSendingImagesButton" data-dojo-type="dijit/form/Button" type="button" role="button"
-                onclick="appendImageToForm();">Add Scanned To Sending Images
-        </button>
-
-    </div>
-
-    <div style="height:15px;"></div>
-
-    <!-- Edit Image Buttons -->
-
-    <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="splitter: true">
-
-        <button data-dojo-type="dijit/form/Button" type="button" role="button"
-                onclick="btnShowImageEditor_onclick();">Show Image Editor
-        </button>
-        <button data-dojo-type="dijit/form/Button" type="button" role="button"
-                onclick="btnRotateLeft_onclick();">Rotate Left
-        </button>
-        <button data-dojo-type="dijit/form/Button" type="button" role="button"
-                onclick="btnRotateRight_onclick();">Rotate Right
-        </button>
-
-        <br/>
-
-        <button data-dojo-type="dijit/form/Button" type="button" role="button"
-                onclick="btnMirror_onclick();">Mirror
-        </button>
-        <button data-dojo-type="dijit/form/Button" type="button" role="button"
-                onclick="btnFlip_onclick();">Flip
-        </button>
-        <button data-dojo-type="dijit/form/Button" type="button" role="button" id="btnCrop"
-                onclick="btnCrop_onclick();">Crop
-        </button>
-        <button data-dojo-type="dijit/form/Button" type="button" role="button"
-                id="btnChangeImageSize"
-                onclick="btnChangeImageSize_onclick();">Change Image Size
-        </button>
-
-    </div>
-
-    <!-- Save Image On Local Computer -->
-
-    <div style="height:15px;"></div>
-
-    <div id="divSave" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="splitter: true">
-        <ul>
-            <li><img alt="arrow" src="../../4%20-%20DWT_HTML_ScanAndSave/Images/arrow.gif" width="9" height="12"/><b>Save
-                Image</b></li>
-            <li>
-                <label for="txtFileNameforSave">File Name: <input type="text" size="20"
-                                                                  id="txtFileNameforSave"/></label></li>
-            <li>
-                <label for="imgTypebmp">
-                    <input type="radio" value="bmp" name="imgType_save" id="imgTypebmp"
-                           onclick="rdsave_onclick();"/>BMP</label>
-                <label for="imgTypejpeg">
-                    <input type="radio" value="jpg" name="imgType_save" id="imgTypejpeg"
-                           onclick="rdsave_onclick();"/>JPEG</label>
-                <label for="imgTypetiff">
-                    <input type="radio" value="tif" name="imgType_save" id="imgTypetiff"
-                           onclick="rdTIFFsave_onclick();"/>TIFF</label>
-                <label for="imgTypepng">
-                    <input type="radio" value="png" name="imgType_save" id="imgTypepng"
-                           onclick="rdsave_onclick();"/>PNG</label>
-                <label for="imgTypepdf">
-                    <input type="radio" value="pdf" name="imgType_save" id="imgTypepdf" onclick="rdPDFsave_onclick();"/>PDF</label>
-            </li>
-            <li>
-                <label for="MultiPageTIFF_save"><input type="checkbox" id="MultiPageTIFF_save"/>Multi-Page TIFF</label>
-                <label for="MultiPagePDF_save"><input type="checkbox" id="MultiPagePDF_save"/>Multi-Page PDF </label>
-            </li>
-        </ul>
-        <input id="btnSave" class="DWTScanButton btn" type="button" value="Save Image" onclick="btnSave_onclick()"/>
-    </div>
-
-
-</div>
-
-
-<!-- Help element for image Editing (Image size Editing) -->
-
-<div id="ImgSizeEditor" style="visibility:hidden; text-align:left;">
-    <ul>
-        <li><label for="img_height"><b>New Height :</b>
-            <input type="text" id="img_height" style="width:50%;" size="10"/>pixel</label></li>
-        <li><label for="img_width"><b>New Width :</b>&nbsp;
-            <input type="text" id="img_width" style="width:50%;" size="10"/>pixel</label></li>
-        <li>Interpolation method:
-            <select size="1" id="InterpolationMethod">
-                <option value=""></option>
-            </select></li>
-        <li style="text-align:center;">
-            <input type="button" value="   OK   " id="btnChangeImageSizeOK"
-                   onclick="btnChangeImageSizeOK_onclick();"/>
-            <input type="button" value=" Cancel " id="btnCancelChange" onclick="btnCancelChange_onclick();"/></li>
-    </ul>
-</div>
-
-<!-- Help element for image Editing (Crop image) -->
-
-<div id="Crop" style="visibility:hidden ;">
-    <div style="width:50%; height:100%; float:left; text-align:left;">
-        <ul>
-            <li><label for="img_left"><b>left: </b>
-                <input type="text" id="img_left" style="width:50%;" size="4"/></label></li>
-            <li><label for="img_top"><b>top: </b>
-                <input type="text" id="img_top" style="width:50%;" size="4"/></label></li>
-            <li style="text-align:center;">
-                <input type="button" value="  OK  " id="btnCropOK" onclick="btnCropOK_onclick()"/></li>
-        </ul>
-    </div>
-    <div style="width:50%; height:100%; float:left; text-align:right;">
-        <ul>
-            <li><label for="img_right"><b>right : </b>
-                <input type="text" id="img_right" style="width:50%;" size="4"/></label></li>
-            <li><label for="img_bottom"><b>bottom:</b>
-                <input type="text" id="img_bottom" style="width:50%;" size="4"/></label></li>
-            <li style=" text-align:center;">
-                <input type="button" value="Cancel" id="cancelcrop" onclick="btnCropCancel_onclick()"/></li>
-        </ul>
-    </div>
-</div>
-
-
-</div>
-
-</div>

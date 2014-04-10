@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Scan documents with thumbnail navigation</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta http-equiv="X-UA-Compatible" content="requiresActiveX=true" />
+<link href="Styles/style-thumbnail.css" type="text/css" rel="stylesheet" />
+</head>
+<body onload="onPageLoad();">
+<div class="DWTPage body_Broad_width">
+    <div class="DWTHeader">
+        <!-- DWT_PageHead.js is used to initiate the head of the sample page. Not necessary!--> 
+        <script src="Scripts/jquery.js"></script> 
+        <script src="Scripts/DWT_PageHead.js"></script>
+    </div>
+    <div class="DWTBody" >
+        <div id="thumbContainer">
+            <ul>
+                <li class="thumb" style="display:none;"> <img src="Images/WebTWAINImage1.png" width="80" height="110"> <i>1</i>
+                    <ul class="editIcons">
+                        <li><a class="editIcon-Save"></a></li>
+                        <li><a class="editIcon-rot_left90"></a></li>
+                        <li><a class="editIcon-rot_right90"></a></li>
+                        <li class="last"><a class="editIcon-remove"></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        
+        <!--This is where Dynamic Web TWAIN control will be rendered.-->
+        <div id="dwtcontrolContainer" class="DWTContainerForThumbnails">
+        </div>
+        
+        <!--This is where you add the actual buttons to control the component.-->
+            <div class="ScanWrapper">
+                <div class="divTableStyle" >
+                    <input class="DWTScanButton btn" type="button" value="Scan" onclick="acquireImage();" />
+                </div>
+                <div id="divInfo"></div>
+            </div>
+
+        <div class="body_clr">
+        </div>
+    </div>
+    <div class="DWTTail">
+        <script src="Scripts/DWT_PageTail.js"></script>
+    </div>
+</div>
+<script src="Scripts/dynamsoft.webtwain.initiate.js"></script> 
+<script src="Scripts/DWTSample_Thumbnails.js"></script> 
+<script>
+	
+</script>
+</body>
+</html>

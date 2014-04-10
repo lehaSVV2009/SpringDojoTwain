@@ -53,7 +53,7 @@
 };
 
 var _dwtParam2 = {
-    'containerID': 'dwtcontrolContainer2',   
+    'containerID': 'dwtcontrolContainer2',
     'width': 440,      
     'height': 600      
 };
