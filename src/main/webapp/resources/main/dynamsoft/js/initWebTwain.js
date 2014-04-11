@@ -1,78 +1,66 @@
-﻿/*!
-* Dynamsoft JavaScript Library for Basic Initiation of Dynamic Web TWAIN
-* More info on DWT: http://www.dynamsoft.com/Products/WebTWAIN_Overview.aspx
-*
-* Copyright 2013, Dynamsoft Corporation 
-* Author: Dynamsoft Support Team
-* Date: Dec. 18 2013 
-* Version: 9.2
-*/
+﻿var Dynamsoft = (function () {
+    // Get Browser Agent Value
+    var ua = (navigator.userAgent.toLowerCase()),
+        _path = 'Resources/',
+        _ret = {
+            DWTProduct: {
+                //--------------------------------------------------------------------------------------
+                //****** <Required> You must specify it before using DWT
+                //--------------------------------------------------------------------------------------
+                _strProductKey: '',
 
-// DWT Properties
+                //------------------------------------------
+                //++++++ <optional>
+                //------------------------------------------
+                _bIsTrial: true,     					// Whether it is using the trial version.
+                _strProductName: 'Dynamic Web TWAIN',	// The Product Name of DWT.
+                _strVersionCode: '9,2', 				// The version of DWT. ActiveX will use this to determine if it is necessary to upgrade the client. Use ',' to separate the numbers.
 
-var Dynamsoft = (function () {
-	// Get Browser Agent Value
-	var ua = (navigator.userAgent.toLowerCase()),
-		_path = 'Resources/',
-		_ret = {
-		DWTProduct : {
-			//--------------------------------------------------------------------------------------
-			//****** <Required> You must specify it before using DWT
-			//--------------------------------------------------------------------------------------
-			_strProductKey: '',
+                _iImageCaptureDriverType: 3,
+                _iBrokerProcessType: 1,
 
-			//------------------------------------------
-			//++++++ <optional>
-			//------------------------------------------
-			_bIsTrial: true,     					// Whether it is using the trial version.
-			_strProductName: 'Dynamic Web TWAIN',	// The Product Name of DWT.
-			_strVersionCode: '9,2', 				// The version of DWT. ActiveX will use this to determine if it is necessary to upgrade the client. Use ',' to separate the numbers. 		
-			
-			 _iImageCaptureDriverType: 3,
-		     _iBrokerProcessType: 1,
-		        
-			_strLPKPath: _path + 'DynamicWebTwain.lpk',     					// The relative path of the LPK file. 
-			_strPKGPath: _path + 'DynamicWebTWAINMacEdition.pkg',     	//The relative path of the PKG file.
-			_strMSIPath: _path + 'DynamicWebTWAINPlugIn.msi',         		//The relative path of the MSI file.
-			_strCABX86Path: _path + 'DynamicWebTWAIN.cab',         			//The relative path of the x86 cab file.
-			_strCABX64Path: _path + 'DynamicWebTWAINx64.cab',      			//The relative path of the x64 cab file.
-			
-			_strMIMETYPE: 'Application/DynamicWebTwain-Plugin',
-			_strPROCLASSID: '5220cb21-c88d-11cf-b347-00aa00a28331',  			
-			_strFULLCLASSID: 'E7DA7F8D-27AB-4EE9-8FC0-3FEC9ECFE758',
-			_strTRAILCLASSID: 'FFC6F181-A5CF-4ec4-A441-093D7134FBF2'
+                _strLPKPath: _path + 'DynamicWebTwain.lpk',     					// The relative path of the LPK file.
+                _strPKGPath: _path + 'DynamicWebTWAINMacEdition.pkg',     	//The relative path of the PKG file.
+                _strMSIPath: _path + 'DynamicWebTWAINPlugIn.msi',         		//The relative path of the MSI file.
+                _strCABX86Path: _path + 'DynamicWebTWAIN.cab',         			//The relative path of the x86 cab file.
+                _strCABX64Path: _path + 'DynamicWebTWAINx64.cab',      			//The relative path of the x64 cab file.
+
+                _strMIMETYPE: 'Application/DynamicWebTwain-Plugin',
+                _strPROCLASSID: '5220cb21-c88d-11cf-b347-00aa00a28331',
+                _strFULLCLASSID: 'E7DA7F8D-27AB-4EE9-8FC0-3FEC9ECFE758',
+                _strTRAILCLASSID: 'FFC6F181-A5CF-4ec4-A441-093D7134FBF2'
 
 
-		},
-		Env: {
-		
-			// Set the Explorer Type
-		_bInIE: (ua.indexOf('msie') != -1 || ua.indexOf('trident') != -1),                 
+            },
+            Env: {
 
-			// Set the Operating System Type
-			// NOTE: only support Mac & Windows
-			_bInWindows : (ua.indexOf('macintosh') == -1),
-			
-			// Set the x86 and x64 type
-			_bInWindowsX64: (ua.indexOf('win64') != -1 || ua.indexOf('x64') != -1),
+                // Set the Explorer Type
+                _bInIE: (ua.indexOf('msie') != -1 || ua.indexOf('trident') != -1),
 
-			_iPluginLength: (this._bInIE) ? 0: navigator.plugins.length,
-						
-			_varSeed : '',               // The seed used to detect the control.
-			_bFirstSWebTwain : true,
-			_aryAllSWebTwain : []
-        },		
-	    mix:function (d, s) {
-			for (var i in s) {
-				d[i] = s[i];
-			}
-		}
-	};
-	return _ret;
+                // Set the Operating System Type
+                // NOTE: only support Mac & Windows
+                _bInWindows: (ua.indexOf('macintosh') == -1),
+
+                // Set the x86 and x64 type
+                _bInWindowsX64: (ua.indexOf('win64') != -1 || ua.indexOf('x64') != -1),
+
+                _iPluginLength: (this._bInIE) ? 0 : navigator.plugins.length,
+
+                _varSeed: '',               // The seed used to detect the control.
+                _bFirstSWebTwain: true,
+                _aryAllSWebTwain: []
+            },
+            mix: function (d, s) {
+                for (var i in s) {
+                    d[i] = s[i];
+                }
+            }
+        };
+    return _ret;
 })();
 
 // DWT Functions
-(function(D) {
+(function (D) {
     function SWebTwain() {
         var swt = this;
         //--------------------------------------------------------------------------------------
@@ -111,11 +99,11 @@ var Dynamsoft = (function () {
         swt._vNotAllowedForChrome = false;
     };
 
-    SWebTwain.prototype.getInstance = function() {
+    SWebTwain.prototype.getInstance = function () {
         return this._objectWebTwain;
     };
 
-    SWebTwain.prototype._init = function(configs) {
+    SWebTwain.prototype._init = function (configs) {
         if (!configs)
             return;
 
@@ -173,7 +161,7 @@ var Dynamsoft = (function () {
         }
     };
 
-    SWebTwain.prototype._attachEvents = function() {
+    SWebTwain.prototype._attachEvents = function () {
         var wt = this;
         if (wt._onPostTransfer != '')
             wt._objectWebTwain.RegisterEvent('onPostTransfer', wt._onPostTransfer);
@@ -198,7 +186,7 @@ var Dynamsoft = (function () {
     };
 
 
-    SWebTwain.prototype._createControl = function() {
+    SWebTwain.prototype._createControl = function () {
 
         var varDWTContainer;
 
@@ -245,7 +233,7 @@ var Dynamsoft = (function () {
     };
 
     // Check if the control is fully loaded.
-    SWebTwain.prototype._controlDetect = function() {
+    SWebTwain.prototype._controlDetect = function () {
         var cWebTwain = Dynamsoft.Env._aryAllSWebTwain[0];
 
         var aryDWTs = Dynamsoft.Env._aryAllSWebTwain;
@@ -257,8 +245,8 @@ var Dynamsoft = (function () {
             for (var i = 0; i < aryDWTs.length; i++) {
                 var o = aryDWTs[i];
                 o._objectWebTwain.ProductKey = D.DWTProduct._strProductKey;
-                o._attachEvents();            
-               
+                o._attachEvents();
+
                 if (!Dynamsoft.Env._bInWindows) {
                     o._objectWebTwain.ImageCaptureDriverType = D.DWTProduct._iImageCaptureDriverType;
                 }
@@ -276,7 +264,7 @@ var Dynamsoft = (function () {
                         }
                     }
                 }
-                
+
                 for (var i = 0; i < navigator.mimeTypes.length; i++) {
                     if (navigator.mimeTypes[i].type.toLowerCase().indexOf(D.DWTProduct._strMIMETYPE.toLowerCase()) > -1) {
                         for (var j = 0; j < aryDWTs.length; j++) {
@@ -300,7 +288,7 @@ var Dynamsoft = (function () {
         }
     };
 
-    SWebTwain.prototype._noControl = function() {
+    SWebTwain.prototype._noControl = function () {
         // Display the message and hide the main control
         if (!Dynamsoft.Env._bInIE) {
             this._createNonInstallDivPlugin();
@@ -308,8 +296,8 @@ var Dynamsoft = (function () {
             document.getElementById(this._strDWTInnerContainerID).style.display = 'none';
         }
     };
-    
-    SWebTwain.prototype._notAllowedForChrome = function() {
+
+    SWebTwain.prototype._notAllowedForChrome = function () {
         // Display the message and hide the main control
         if (!Dynamsoft.Env._bInIE) {
             ua = (navigator.userAgent.toLowerCase());
@@ -321,26 +309,26 @@ var Dynamsoft = (function () {
         }
     };
 
-    SWebTwain.prototype._createNonAllowedDivPlugin = function() {
+    SWebTwain.prototype._createNonAllowedDivPlugin = function () {
         var o = document.getElementById(this._strDWTNonInstallInnerContainerID);
         if (o.innerHTML != '')
             return;
-            
+
         var strObjString = ["<div style='display: block; border:solid black 1px; text-align:center; width:",
-			this._iWidth,
-			"px;height:",
-			this._iHeight,
-			"px'>",
-			"<ul style='padding-top:100px;'>",
-			"<li>The Component is not allowed to run on this site.</li>",
-			"<li>Please click \"Always run on this site\" for the prompt \"" + D.DWTProduct._strProductName + " Plugin needs your permission to run\", refresh/restart the browser and try again.</li>",
-			"</ul></div>"].join('');
-        
+            this._iWidth,
+            "px;height:",
+            this._iHeight,
+            "px'>",
+            "<ul style='padding-top:100px;'>",
+            "<li>The Component is not allowed to run on this site.</li>",
+            "<li>Please click \"Always run on this site\" for the prompt \"" + D.DWTProduct._strProductName + " Plugin needs your permission to run\", refresh/restart the browser and try again.</li>",
+            "</ul></div>"].join('');
+
 
         o.innerHTML = strObjString;
     };
 
-    SWebTwain.prototype._createNonInstallDivPlugin = function() {
+    SWebTwain.prototype._createNonInstallDivPlugin = function () {
         var o = document.getElementById(this._strDWTNonInstallInnerContainerID);
         if (o.innerHTML != '')
             return;
@@ -348,15 +336,15 @@ var Dynamsoft = (function () {
         var strHref = '';
         if (Dynamsoft.Env._bInIE) {
             var strObjString = ["<div style='display: block; border:solid black 1px; text-align:center; width:",
-				this._iWidth,
-				'px;height:',
-				this._iHeight,
-				"px'>",
-				"<ul style='padding-top:100px;'>",
-				"<li>The Component is not installed</li>",
-				"<li>You need to download and install the ActiveX to use this sample.</li>",
-				"<li>Please follow the instructions in the information bar.</li>",
-				"</ul></div>"].join('');
+                this._iWidth,
+                'px;height:',
+                this._iHeight,
+                "px'>",
+                "<ul style='padding-top:100px;'>",
+                "<li>The Component is not installed</li>",
+                "<li>You need to download and install the ActiveX to use this sample.</li>",
+                "<li>Please follow the instructions in the information bar.</li>",
+                "</ul></div>"].join('');
         }
         else {
 
@@ -376,19 +364,19 @@ var Dynamsoft = (function () {
             }
 
             var strObjString = ["<div style='display: block; border:solid black 1px; text-align:center; width:",
-				this._iWidth,
-				"px;height:",
-				this._iHeight,
-				"px'>",
-				"<ul style='padding-top:100px;'>",
-				"<li>The Component is not installed</li>",
-				"<li>You need to download and install the plug-in to use this sample.</li>",
-				"<li>Please click the below link to download it.</li>",
-				"<li>After the installation, please RESTART your browser.</li>",
-				"<li><a href='",
-				strHref,
-				"'>Download</a></li>",
-				"</ul></div>"].join('');
+                this._iWidth,
+                "px;height:",
+                this._iHeight,
+                "px'>",
+                "<ul style='padding-top:100px;'>",
+                "<li>The Component is not installed</li>",
+                "<li>You need to download and install the plug-in to use this sample.</li>",
+                "<li>Please click the below link to download it.</li>",
+                "<li>After the installation, please RESTART your browser.</li>",
+                "<li><a href='",
+                strHref,
+                "'>Download</a></li>",
+                "</ul></div>"].join('');
         }
 
         o.innerHTML = strObjString;
@@ -424,7 +412,7 @@ var Dynamsoft = (function () {
 
     };
 
-    D.WebTwain = function(objectConfigs) {
+    D.WebTwain = function (objectConfigs) {
 
         var isFirstControl = Dynamsoft.Env._bFirstSWebTwain;
 
